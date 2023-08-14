@@ -89,20 +89,23 @@ def test_readable_function():
     go_to_companyname_homepage(page_url="https://companyname.com")
     find_registration_button_on_login_page(page_url="https://companyname.com/login", button_text="Register")
 
+def transformation_to_nice_text(func, *args):
+    name = func.__name__.title().replace('_', ' ')
+    new_args = ', '.join(args) #преобразовали массив в строку и добавили ', ' между объектами
+    result = f'{name} [{new_args}]'
+    return result
+
 
 def open_browser(browser_name):
-    actual_result = open_browser.__name__.title().replace('_', ' ')
-    actual_result = f"{actual_result} [{browser_name}]"
+    actual_result = transformation_to_nice_text(open_browser, browser_name)
     assert actual_result == "Open Browser [Chrome]"
 
 
 def go_to_companyname_homepage(page_url):
-    actual_result_1 = go_to_companyname_homepage.__name__.title().replace('_', ' ')
-    actual_result_1 = f"{actual_result_1} [{page_url}]"
+    actual_result_1 = transformation_to_nice_text(go_to_companyname_homepage, page_url)
     assert actual_result_1 == "Go To Companyname Homepage [https://companyname.com]"
 
 
 def find_registration_button_on_login_page(page_url, button_text):
-    actual_result_2 = find_registration_button_on_login_page.__name__.title().replace('_', ' ')
-    actual_result_2 = f'{actual_result_2} [{page_url}, Register]'
+    actual_result_2 = transformation_to_nice_text(find_registration_button_on_login_page, page_url, button_text)
     assert actual_result_2 == "Find Registration Button On Login Page [https://companyname.com/login, Register]"
