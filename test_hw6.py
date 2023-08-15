@@ -93,6 +93,7 @@ def transformation_to_nice_text(func, *args):
     name = func.__name__.title().replace('_', ' ')
     new_args = ', '.join(args) #преобразовали массив в строку и добавили ', ' между объектами
     result = f'{name} [{new_args}]'
+    print(result)
     return result
 
 
